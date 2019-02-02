@@ -6,14 +6,14 @@
 #    By: zcadwyl <zcadwyl@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/02 19:15:31 by zcadwyl           #+#    #+#              #
-#    Updated: 2019/02/02 19:15:34 by zcadwyl          ###   ########.fr        #
+#    Updated: 2019/02/02 19:44:57 by zcadwyl          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= fillit 
 
-SRC_DIR	:= ./src/
-INC_DIR	:= -I./includes -I./libft/includes
+SRC_DIR	:= ./fillit_p/
+INC_DIR	:= -I./fillit_p -I./libft/includes
 LIB = libft/libft.a
 
 SRC		:= main.c \
