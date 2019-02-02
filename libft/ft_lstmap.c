@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcadwyl <zcadwyl@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/02 17:10:39 by zcadwyl           #+#    #+#             */
-/*   Updated: 2019/02/02 18:47:02 by zcadwyl          ###   ########.fr       */
+/*   Created: 2018/11/11 21:23:09 by aezzeddi          #+#    #+#             */
+/*   Updated: 2018/11/30 17:13:43 by zcadwyl          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <fcntl.h>
 #include "libft.h"
-#include "fillit.h"
 
-int	main(int argc, char **argv)
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list	*list;
-	t_map	*map;
+	t_list	*begin;
+	t_list	*temp;
 
-	if (argc != 2)
+	if (!lst)
+		return (NULL);
+	temp = f(lst);
+	begin = temp;
+	while (lst->next)
 	{
-		ft_putstr("usage: fillit input_file\n");
-		return (1);
+		lst = lst->next;
+		temp->next = f(lst);
+		temp = temp->next;
 	}
-	if ((list = read_input(open(argv[1], O_RDONLY))) == NULL)
-	{
-		ft_putstr("error\n");
-		return (1);
-	}
-	ft_lstrev(&list);
-	map = solve(list);
-	print_map(map);
-	free_map(map);
-	ft_lstdel(&list, del_ttrno);
-	return (0);
+	return (begin);
 }

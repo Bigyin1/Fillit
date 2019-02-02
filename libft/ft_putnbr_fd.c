@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcadwyl <zcadwyl@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/02 17:10:39 by zcadwyl           #+#    #+#             */
-/*   Updated: 2019/02/02 18:47:02 by zcadwyl          ###   ########.fr       */
+/*   Created: 2018/11/09 23:08:43 by aezzeddi          #+#    #+#             */
+/*   Updated: 2018/11/30 15:58:04 by zcadwyl          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <fcntl.h>
 #include "libft.h"
-#include "fillit.h"
 
-int	main(int argc, char **argv)
+void	ft_putnbr_fd(int n, int fd)
 {
-	t_list	*list;
-	t_map	*map;
-
-	if (argc != 2)
+	if (n < 0)
 	{
-		ft_putstr("usage: fillit input_file\n");
-		return (1);
+		ft_putchar_fd('-', fd);
+		if (n == -2147483648)
+		{
+			ft_putchar_fd('2', fd);
+			ft_putnbr_fd(147483648, fd);
+			return ;
+		}
+		n = -n;
 	}
-	if ((list = read_input(open(argv[1], O_RDONLY))) == NULL)
+	if (n > 9)
 	{
-		ft_putstr("error\n");
-		return (1);
+		ft_putnbr_fd(n / 10, fd);
 	}
-	ft_lstrev(&list);
-	map = solve(list);
-	print_map(map);
-	free_map(map);
-	ft_lstdel(&list, del_ttrno);
-	return (0);
+	ft_putchar_fd(n % 10 + '0', fd);
 }

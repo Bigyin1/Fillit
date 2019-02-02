@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcadwyl <zcadwyl@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/02 17:10:39 by zcadwyl           #+#    #+#             */
-/*   Updated: 2019/02/02 18:47:02 by zcadwyl          ###   ########.fr       */
+/*   Created: 2018/11/10 02:36:20 by aezzeddi          #+#    #+#             */
+/*   Updated: 2018/11/30 15:58:27 by zcadwyl          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <fcntl.h>
 #include "libft.h"
-#include "fillit.h"
 
-int	main(int argc, char **argv)
+void	ft_putstr_fd(char const *s, int fd)
 {
-	t_list	*list;
-	t_map	*map;
+	int	i;
 
-	if (argc != 2)
+	i = 0;
+	if (!s)
+		return ;
+	while (s[i] != '\0')
 	{
-		ft_putstr("usage: fillit input_file\n");
-		return (1);
+		ft_putchar_fd(s[i], fd);
+		i++;
 	}
-	if ((list = read_input(open(argv[1], O_RDONLY))) == NULL)
-	{
-		ft_putstr("error\n");
-		return (1);
-	}
-	ft_lstrev(&list);
-	map = solve(list);
-	print_map(map);
-	free_map(map);
-	ft_lstdel(&list, del_ttrno);
-	return (0);
 }

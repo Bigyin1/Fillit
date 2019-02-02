@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcadwyl <zcadwyl@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/02 17:10:39 by zcadwyl           #+#    #+#             */
-/*   Updated: 2019/02/02 18:47:02 by zcadwyl          ###   ########.fr       */
+/*   Created: 2018/11/11 23:54:47 by aezzeddi          #+#    #+#             */
+/*   Updated: 2018/11/30 17:13:52 by zcadwyl          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <fcntl.h>
 #include "libft.h"
-#include "fillit.h"
 
-int	main(int argc, char **argv)
+t_list	*ft_lstnew(void const *content, size_t content_size)
 {
-	t_list	*list;
-	t_map	*map;
+	t_list *new;
 
-	if (argc != 2)
+	new = (t_list *)malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->next = NULL;
+	if (!content)
 	{
-		ft_putstr("usage: fillit input_file\n");
-		return (1);
+		new->content = NULL;
+		new->content_size = 0;
+		return (new);
 	}
-	if ((list = read_input(open(argv[1], O_RDONLY))) == NULL)
-	{
-		ft_putstr("error\n");
-		return (1);
-	}
-	ft_lstrev(&list);
-	map = solve(list);
-	print_map(map);
-	free_map(map);
-	ft_lstdel(&list, del_ttrno);
-	return (0);
+	new->content = malloc(content_size);
+	ft_memcpy(new->content, content, content_size);
+	new->content_size = content_size;
+	return (new);
 }

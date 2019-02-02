@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcadwyl <zcadwyl@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/02 17:10:39 by zcadwyl           #+#    #+#             */
-/*   Updated: 2019/02/02 18:47:02 by zcadwyl          ###   ########.fr       */
+/*   Created: 2018/08/28 16:34:07 by zcadwyl           #+#    #+#             */
+/*   Updated: 2018/11/30 15:15:01 by zcadwyl          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <fcntl.h>
 #include "libft.h"
-#include "fillit.h"
 
-int	main(int argc, char **argv)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	t_list	*list;
-	t_map	*map;
+	size_t	src_size;
+	size_t	dest_size;
+	size_t	i;
 
-	if (argc != 2)
+	src_size = ft_strlen(src);
+	dest_size = ft_strlen(dst);
+	i = 0;
+	if (dest_size > size)
+		return (size + src_size);
+	while (src[i] && dest_size + i + 1 < size)
 	{
-		ft_putstr("usage: fillit input_file\n");
-		return (1);
+		dst[dest_size + i] = src[i];
+		i++;
 	}
-	if ((list = read_input(open(argv[1], O_RDONLY))) == NULL)
-	{
-		ft_putstr("error\n");
-		return (1);
-	}
-	ft_lstrev(&list);
-	map = solve(list);
-	print_map(map);
-	free_map(map);
-	ft_lstdel(&list, del_ttrno);
-	return (0);
+	dst[dest_size + i] = '\0';
+	return (dest_size + src_size);
 }

@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcadwyl <zcadwyl@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/02 17:10:39 by zcadwyl           #+#    #+#             */
-/*   Updated: 2019/02/02 18:47:02 by zcadwyl          ###   ########.fr       */
+/*   Created: 2018/11/30 14:12:31 by zcadwyl           #+#    #+#             */
+/*   Updated: 2018/11/30 14:12:38 by zcadwyl          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <fcntl.h>
 #include "libft.h"
-#include "fillit.h"
 
-int	main(int argc, char **argv)
+char	*ft_strrchr(const char *s, int c)
 {
-	t_list	*list;
-	t_map	*map;
+	int	len;
 
-	if (argc != 2)
+	len = ft_strlen(s);
+	while (len >= 0)
 	{
-		ft_putstr("usage: fillit input_file\n");
-		return (1);
+		if (s[len] == (unsigned char)c)
+			return ((char *)s + len);
+		len--;
 	}
-	if ((list = read_input(open(argv[1], O_RDONLY))) == NULL)
-	{
-		ft_putstr("error\n");
-		return (1);
-	}
-	ft_lstrev(&list);
-	map = solve(list);
-	print_map(map);
-	free_map(map);
-	ft_lstdel(&list, del_ttrno);
-	return (0);
+	return (NULL);
 }

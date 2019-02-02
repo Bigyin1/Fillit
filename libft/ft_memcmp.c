@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcadwyl <zcadwyl@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/02 17:10:39 by zcadwyl           #+#    #+#             */
-/*   Updated: 2019/02/02 18:47:02 by zcadwyl          ###   ########.fr       */
+/*   Created: 2018/11/27 16:31:35 by zcadwyl           #+#    #+#             */
+/*   Updated: 2018/11/30 16:10:06 by zcadwyl          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <fcntl.h>
 #include "libft.h"
-#include "fillit.h"
 
-int	main(int argc, char **argv)
+int	ft_memcmp(const void *memptr1, const void *memptr2, size_t num)
 {
-	t_list	*list;
-	t_map	*map;
+	size_t i;
 
-	if (argc != 2)
+	i = 0;
+	while (i < num)
 	{
-		ft_putstr("usage: fillit input_file\n");
-		return (1);
+		if (((unsigned char *)memptr1)[i] \
+		!= ((unsigned char *)memptr2)[i])
+		{
+			return (((unsigned char *)memptr1)[i] \
+			- ((unsigned char *)memptr2)[i]);
+		}
+		++i;
 	}
-	if ((list = read_input(open(argv[1], O_RDONLY))) == NULL)
-	{
-		ft_putstr("error\n");
-		return (1);
-	}
-	ft_lstrev(&list);
-	map = solve(list);
-	print_map(map);
-	free_map(map);
-	ft_lstdel(&list, del_ttrno);
 	return (0);
 }

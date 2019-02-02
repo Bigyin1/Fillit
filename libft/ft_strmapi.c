@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcadwyl <zcadwyl@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/02 17:10:39 by zcadwyl           #+#    #+#             */
-/*   Updated: 2019/02/02 18:47:02 by zcadwyl          ###   ########.fr       */
+/*   Created: 2017/06/09 23:22:23 by aezzeddi          #+#    #+#             */
+/*   Updated: 2018/11/30 15:50:50 by zcadwyl          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <fcntl.h>
 #include "libft.h"
-#include "fillit.h"
 
-int	main(int argc, char **argv)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	t_list	*list;
-	t_map	*map;
+	char			*new_str;
+	unsigned int	i;
 
-	if (argc != 2)
+	if (!s)
+		return (NULL);
+	new_str = ft_strnew(ft_strlen(s));
+	if (!new_str)
+		return (NULL);
+	i = 0;
+	while (s[i])
 	{
-		ft_putstr("usage: fillit input_file\n");
-		return (1);
+		new_str[i] = f(i, s[i]);
+		i++;
 	}
-	if ((list = read_input(open(argv[1], O_RDONLY))) == NULL)
-	{
-		ft_putstr("error\n");
-		return (1);
-	}
-	ft_lstrev(&list);
-	map = solve(list);
-	print_map(map);
-	free_map(map);
-	ft_lstdel(&list, del_ttrno);
-	return (0);
+	return (new_str);
 }

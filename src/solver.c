@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   solver.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zcadwyl <zcadwyl@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/02 17:11:18 by zcadwyl           #+#    #+#             */
+/*   Updated: 2019/02/02 18:44:20 by zcadwyl          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <string.h>
 #include "libft.h"
 #include "fillit.h"
@@ -22,7 +34,7 @@ int		solve_map(t_map *map, t_list *list)
 				if (solve_map(map, list->next))
 					return (1);
 				else
-					set_piece(ttrno, map, x, y, '.');
+					set_piece(ttrno, map, y * map->size + x, '.');
 			}
 			x++;
 		}

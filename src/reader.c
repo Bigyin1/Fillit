@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   reader.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zcadwyl <zcadwyl@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/02 17:11:08 by zcadwyl           #+#    #+#             */
+/*   Updated: 2019/02/02 18:46:46 by zcadwyl          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include "libft.h"
 #include "fillit.h"
 
-void del_ttrno(void *ttrno, size_t len)
+void	del_ttrno(void *ttrno, size_t len)
 {
 	ft_memdel(&ttrno);
 	len++;
 }
 
-void ttrno_to_vec(char *str, char *dst, char value)
+void	ttrno_to_vec(char *str, char *dst, char value)
 {
 	int i;
 	int j;
@@ -33,7 +45,7 @@ void ttrno_to_vec(char *str, char *dst, char value)
 	}
 }
 
-int check_connection(char *str)
+int		check_connection(char *str)
 {
 	int block;
 	int i;
@@ -54,7 +66,7 @@ int check_connection(char *str)
 	return (block == 3 || block == 4);
 }
 
-int check_tetremino(char *str, int read_count)
+int		check_tetremino(char *str, int read_count)
 {
 	int i;
 	int blocks;
@@ -81,13 +93,13 @@ int check_tetremino(char *str, int read_count)
 	return (1);
 }
 
-t_list *read_input(int fd)
+t_list	*read_input(int fd)
 {
-	char buf[21];
-	int count;
-	t_list *list;
-	char tetremino[5];
-	char curr_letter;
+	char	buf[21];
+	int		count;
+	t_list	*list;
+	char	tetremino[5];
+	char	curr_letter;
 
 	list = NULL;
 	curr_letter = 'A';
@@ -107,6 +119,5 @@ t_list *read_input(int fd)
 		ft_lstdel(&list, del_ttrno);
 		return (0);
 	}
-	ft_lstrev(&list);
 	return (list);
 }

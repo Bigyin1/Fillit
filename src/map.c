@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zcadwyl <zcadwyl@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/02 17:10:56 by zcadwyl           #+#    #+#             */
+/*   Updated: 2019/02/02 18:43:13 by zcadwyl          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 #include "libft.h"
 
@@ -69,19 +81,24 @@ int		place(char *ttrno, t_map *map, int x, int y)
 		new_y = y;
 		new_y += (ttrno[1] + ttrno[i]) / 4 - ttrno[1] / 4;
 		new_x += (ttrno[1] + ttrno[i]) % 4 - ttrno[1] % 4;
-		if (new_x >= map->size || new_y >= map->size || map->array[new_y][new_x] != '.')
+		if (new_x >= map->size || new_y >= map->size ||
+			map->array[new_y][new_x] != '.')
 			return (0);
 	}
-	set_piece(ttrno, map, x, y, ttrno[0]);
+	set_piece(ttrno, map, y * map->size + x, ttrno[0]);
 	return (1);
 }
 
-void	set_piece(char *ttrno, t_map *map, int x, int y, char c)
+void	set_piece(char *ttrno, t_map *map, int sum, char c)
 {
 	int i;
 	int new_x;
 	int new_y;
+	int x;
+	int y;
 
+	y = sum / map->size;
+	x = sum % map->size;
 	i = 1;
 	map->array[y][x] = c;
 	while (++i < 5)
